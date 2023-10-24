@@ -15,10 +15,13 @@ for (let post of postData) {
   }
 }
 
+
 for (let vote of votesData) {
   for (let key in userData) {
     if (vote["userId"] == key) {
       userData[key] += 1;
+    } else if (!userData[vote['userId']]){
+      userData[vote['userId']] = 1;
     }
   }
 }
