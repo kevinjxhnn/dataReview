@@ -7,24 +7,25 @@ const { type } = require("os");
 And then they get 1 point per each upvote / downvote */
 
 let userData = {};
+
 for (let post of postData) {
-  if (!userData[post["userId"]]) {
-    userData[post["userId"]] = 5;
+  const userId = post.userId;
+  if (!userData[userId]) {
+    userData[userId] = 5;
   } else {
-    userData[post["userId"]] += 5;
+    userData[userId] += 5;
   }
 }
-
 
 for (let vote of votesData) {
-  for (let key in userData) {
-    if (vote["userId"] == key) {
-      userData[key] += 1;
-    } else if (!userData[vote['userId']]){
-      userData[vote['userId']] = 1;
-    }
+  const userId = vote.userId;
+  if (!userData[userId]) {
+    userData[userId] = 1;
+  } else {
+    userData[userId] += 1;
   }
 }
+
 
 const userObject = Object.fromEntries(
   Object.entries(userData)
@@ -36,10 +37,9 @@ const userObject = Object.fromEntries(
 
 let result = {};
 for (let userId in userObject) {
-  for (let user of userArray) {
-    if (userId == user["id"]) {
-      result[user["name"]] = userObject[userId];
-    }
+  const user = userArray.find((eachUser) => userId == eachUser.id);
+  if (user) {
+    result[user["name"]] = userObject[userId];
   }
 }
 
