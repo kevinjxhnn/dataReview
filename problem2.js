@@ -26,7 +26,6 @@ for (let vote of votesData) {
   }
 }
 
-
 const userObject = Object.fromEntries(
   Object.entries(userData)
     .sort((a, b) => {

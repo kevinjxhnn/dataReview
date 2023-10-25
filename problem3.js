@@ -21,14 +21,12 @@ const result = Object.fromEntries(
 );
 
 let topFiveUsers = {};
-console.log(result)
 
 for (let userId in result) {
   const user = userData.find((eachUser) => eachUser.id == userId);
   if (user) {
-    topFiveUsers[user["name"]] = result[userId]
+    topFiveUsers[user["name"]] = result[userId];
   }
 }
-
 
 console.log(topFiveUsers);
